@@ -89,7 +89,7 @@ EOF
 mkdir /etc/openvpn/ccd-clusters
 cat << EOF > /etc/openvpn/ccd-clusters/clusterX
 ifconfig-push 10.78.110.2 255.255.255.0
-push "route 10.78.100.0 255.255.255.0 10.78.110.1"
+push "route 10.210.0.0 255.255.0.0 10.78.110.1"
 iroute 10.10.0.0 255.255.0.0
 EOF
 

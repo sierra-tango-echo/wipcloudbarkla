@@ -140,12 +140,18 @@ _EOF_
 bash /etc/openvpn/buildinstaller.sh clusterX
 
 systemctl enable openvpn@flightconnector
-systemctl start openvpn@flightconnector
+
 
 firewall-cmd --new-zone cluster0 --permanent
 firewall-cmd --add-interface tun0 --zone cluster0 --permanent
-firewall-cmd --add-interface tun0 --zone cluster0
 firewall-cmd --add-port 2005/tcp --zone external --permanent
 
 firewall-cmd --set-target=ACCEPT --zone cluster0 --permanent
 
+firewall-cmd --permanent --zone=cluster0 --add-rich-rule='rule family=ipv4 source address=10.78.110.2/255.255.255.0 masquerade'
+
+systemctl restart network
+
+systemctl restart firewalld 
+
+systemctl restart openvpn@flightconnector
